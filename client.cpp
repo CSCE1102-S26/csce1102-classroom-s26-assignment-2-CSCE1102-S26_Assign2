@@ -43,3 +43,14 @@ QCoro::Task<void> client::sendNetworkMessage(QString host, quint16 port, QString
     // TODO: Show a QMessageBox::information stating the message was sent successfully.
 
 }
+
+void client::on_SendpushButton_clicked()
+{
+    QString host = "127.0.0.1";
+    quint16 port = 54321;
+
+    QString message = ui->MessagelineEdit->text();
+
+    sendNetworkMessage(host, port, message);
+}
+

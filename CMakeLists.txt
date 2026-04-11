@@ -15,24 +15,15 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
 
 # 3. QCoro download and configuration block
-include(FetchContent)
-set(USE_QT_VERSION ${QT_VERSION_MAJOR} CACHE STRING "Compile QCoro with Qt${QT_VERSION_MAJOR}")
+# Disable unnecessary QCoro modules
+set(QCORO_WITH_QTQML OFF)
+set(QCORO_WITH_QTWEBSOCKETS OFF)
+set(QCORO_WITH_QTDBUS OFF)
+set(QCORO_BUILD_EXAMPLES OFF)
+set(QCORO_BUILD_TESTING OFF)
 
-# Turn off EVERYTHING except Core and Network to ensure cross-platform compatibility
-set(QCORO_BUILD_EXAMPLES OFF CACHE BOOL "Don't build QCoro examples" FORCE)
-set(QCORO_BUILD_TESTING OFF CACHE BOOL "Don't build QCoro tests" FORCE)
-set(QCORO_WITH_QTDBUS OFF CACHE BOOL "Don't build QCoro DBus" FORCE)
-set(QCORO_WITH_QTWEBSOCKETS OFF CACHE BOOL "Don't build QCoro WebSockets" FORCE)
-set(QCORO_WITH_QTQML OFF CACHE BOOL "Don't build QCoro QML" FORCE)
-set(QCORO_WITH_QTQUICK OFF CACHE BOOL "Don't build QCoro Quick" FORCE)
-set(BUILD_TESTING OFF CACHE BOOL "Disable standard tests" FORCE)
-
-FetchContent_Declare(
-    QCoro
-    GIT_REPOSITORY https://github.com/danvratil/qcoro.git
-    GIT_TAG v0.10.0
-)
-FetchContent_MakeAvailable(QCoro)
+# Use LOCAL qcoro folder
+add_subdirectory(qcoro)
 
 set(PROJECT_SOURCES
         main.cpp
