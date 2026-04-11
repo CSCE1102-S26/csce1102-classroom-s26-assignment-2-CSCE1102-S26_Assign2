@@ -17,10 +17,10 @@
    <widget class="QPushButton" name="sendButton">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>140</y>
-      <width>90</width>
-      <height>29</height>
+      <x>620</x>
+      <y>350</y>
+      <width>161</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
@@ -30,23 +30,13 @@
    <widget class="QLineEdit" name="messagelineEdit">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>240</y>
-      <width>113</width>
-      <height>28</height>
+      <x>30</x>
+      <y>350</y>
+      <width>581</width>
+      <height>51</height>
      </rect>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>25</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
