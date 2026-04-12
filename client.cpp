@@ -1,8 +1,8 @@
 #include "client.h"
 #include "ui_client.h"
 #include <QTcpSocket>
-#include <QCoro/QCoroNetwork> // Required to await QTcpSocket
-#include <QMessageBox>        // Required for UI feedback
+#include <QCoro/QCoroNetwork>
+#include <QMessageBox>
 #include <QDebug>
 
 client::client(QWidget *parent)
@@ -19,27 +19,36 @@ client::~client()
 
 QCoro::Task<void> client::sendNetworkMessage(QString host, quint16 port, QString message)
 {
-    // TODO: Create a QTcpSocket locally. (It will be destroyed automatically when this function ends).
+    QTcpSocket socket;
+    qDebug() << "Attempting to connect to" << host << "on port" << port;
+    socket.connectToHost(host, port);
+    bool connected = co_await qCoro(socket).waitForConnected();
 
-    // TODO: Print a qDebug() message stating you are attempting to connect to the host and port.
+    if (!connected) {
+        QMessageBox::critical(this, "Connection Failed",
+                              "Could not connect: " + socket.errorString());
+        co_return;
+    }
 
-    // TODO: Initiate the connection to the host using the socket.
+    qDebug() << "Connected to server at" << host << ":" << port;
+    socket.write(message.toUtf8());
 
-    // TODO: Asynchronously wait for the connection to establish using co_await and qCoro.
-    // Save the result into a boolean variable (e.g., 'connected').
+    socket.disconnectFromHost();
+    bool disconnected = co_await qCoro(socket).waitForDisconnected();
 
-    // TODO: Write an if-statement. If NOT connected:
-    // 1. Show a QMessageBox::critical stating the connection failed, using socket.errorString().
-    // 2. co_return; to exit early.
+    if (!disconnected) {
+        QMessageBox::critical(this, "Disconnect Failed",
+                              "Could not disconnect: " + socket.errorString());
+        co_return;
+    }
 
-    // TODO: Print a qDebug() message confirming connection.
+    QMessageBox::information(this, "Success", "Message sent successfully!");
+}
 
-    // TODO: Write the 'message' variable to the socket (remember to convert it to Utf8).
-
-    // TODO: Tell Qt to gracefully disconnect from the host.
-
-    // TODO: Asynchronously wait for Qt to finish flushing the buffer and disconnecting using co_await and qCoro.
-
-    // TODO: Show a QMessageBox::information stating the message was sent successfully.
-
+void client::on_sendButton_clicked()
+{
+    QString host = "127.0.0.1";
+    quint16 port = 54321;
+    QString message = ui->messagelineEdit->text();
+    sendNetworkMessage(host, port, message);
 }
