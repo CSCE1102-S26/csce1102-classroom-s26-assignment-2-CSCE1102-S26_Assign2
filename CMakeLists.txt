@@ -26,6 +26,14 @@ set(QCORO_WITH_QTWEBSOCKETS OFF CACHE BOOL "Don't build QCoro WebSockets" FORCE)
 set(QCORO_WITH_QTQML OFF CACHE BOOL "Don't build QCoro QML" FORCE)
 set(QCORO_WITH_QTQUICK OFF CACHE BOOL "Don't build QCoro Quick" FORCE)
 set(BUILD_TESTING OFF CACHE BOOL "Disable standard tests" FORCE)
+set(QCORO_ENABLE_QML OFF CACHE BOOL "Disable QCoro QML completely" FORCE)
+set(QCORO_WITH_QML OFF CACHE BOOL "Disable any QML support" FORCE)
+
+set(QCORO_WITH_QTNETWORK ON CACHE BOOL "" FORCE)
+set(QCORO_BUILD_NETWORK ON CACHE BOOL "" FORCE)
+
+message(STATUS "QCoro Core linked: ${QCoroCore_FOUND}")
+message(STATUS "QCoro Network linked: ${QCoroNetwork_FOUND}")
 
 FetchContent_Declare(
     QCoro
