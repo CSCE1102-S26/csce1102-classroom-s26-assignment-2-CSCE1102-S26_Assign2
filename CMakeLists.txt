@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Network)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
 
+
 # 3. QCoro download and configuration block
 include(FetchContent)
 set(USE_QT_VERSION ${QT_VERSION_MAJOR} CACHE STRING "Compile QCoro with Qt${QT_VERSION_MAJOR}")
@@ -30,8 +31,9 @@ set(BUILD_TESTING OFF CACHE BOOL "Disable standard tests" FORCE)
 FetchContent_Declare(
     QCoro
     GIT_REPOSITORY https://github.com/danvratil/qcoro.git
-    GIT_TAG v0.10.0
+    GIT_TAG main
 )
+
 FetchContent_MakeAvailable(QCoro)
 
 set(PROJECT_SOURCES
