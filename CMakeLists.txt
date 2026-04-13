@@ -30,7 +30,7 @@ set(BUILD_TESTING OFF CACHE BOOL "Disable standard tests" FORCE)
 FetchContent_Declare(
     QCoro
     GIT_REPOSITORY https://github.com/danvratil/qcoro.git
-    GIT_TAG v0.10.0
+    GIT_TAG v0.9.0
 )
 FetchContent_MakeAvailable(QCoro)
 

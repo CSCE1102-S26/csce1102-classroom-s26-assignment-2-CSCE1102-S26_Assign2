@@ -43,3 +43,23 @@ QCoro::Task<void> client::sendNetworkMessage(QString host, quint16 port, QString
     // TODO: Show a QMessageBox::information stating the message was sent successfully.
 
 }
+
+void client::on_sendButton_clicked()
+{
+    // TODO: Declare a QString 'host' and set it to "127.0.0.1"
+
+    // TODO: Declare a quint16 'port' and set it to 54321
+
+    // TODO: Declare a QString 'message' and retrieve the text from your 'messagelineEdit' UI element.
+
+    // TODO: Call your sendNetworkMessage() function, passing in the host, port, and message.
+    // (Because it returns a QCoro::Task, Qt will automatically spawn it in the background without freezing the UI!)
+    QString host = "127.0.0.1";
+
+    quint16 port = 54321;
+
+    QString message = ui->messagelineEdit->text();
+
+    sendNetworkMessage(host, port, message);
+}
+
