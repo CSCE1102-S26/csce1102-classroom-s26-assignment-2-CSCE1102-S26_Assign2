@@ -42,5 +42,7 @@ QCoro::Task<void> client::sendNetworkMessage(QString host, quint16 port, QString
     co_wait qCoro(socket).waitForDisconnected();
 
     QMessageBox::information(this,"Success","Message sent successfully!");
+    //chatgpt link:https://chatgpt.com/share/69dd27fe-52e4-8328-95a3-e18883a16312
+    //Mazen Abudaif-900221772
 
 }
