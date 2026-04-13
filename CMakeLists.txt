@@ -18,8 +18,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network)
 include(FetchContent)
 set(USE_QT_VERSION ${QT_VERSION_MAJOR} CACHE STRING "Compile QCoro with Qt${QT_VERSION_MAJOR}")
 
-# Turn off EVERYTHING except Core and Network to ensure cross-platform compatibility
-set(QCORO_BUILD_EXAMPLES OFF CACHE BOOL "Don't build QCoro examples" FORCE)
+# Turn off EVERYTHING except Core and Network to ensure cross-platform compatibilityset(QCORO_BUILD_EXAMPLES OFF CACHE BOOL "Don't build QCoro examples" FORCE)
 set(QCORO_BUILD_TESTING OFF CACHE BOOL "Don't build QCoro tests" FORCE)
 set(QCORO_WITH_QTDBUS OFF CACHE BOOL "Don't build QCoro DBus" FORCE)
 set(QCORO_WITH_QTWEBSOCKETS OFF CACHE BOOL "Don't build QCoro WebSockets" FORCE)

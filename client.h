@@ -2,8 +2,8 @@
 #define CLIENT_H
 
 #include <QMainWindow>
-#include <qcorotask.h> // Include QCoro core
-
+// #include <qcorotask.h> // Include QCoro core
+#include <QCoro/QCoroTask>
 QT_BEGIN_NAMESPACE
 namespace Ui { class client; }
 QT_END_NAMESPACE
@@ -14,6 +14,9 @@ class client : public QMainWindow {
 public:
     client(QWidget *parent = nullptr);
     ~client();
+
+private slots:
+    void on_sendButton_clicked();
 
 private:
     Ui::client *ui;
