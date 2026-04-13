@@ -27,11 +27,15 @@ set(QCORO_WITH_QTQML OFF CACHE BOOL "Don't build QCoro QML" FORCE)
 set(QCORO_WITH_QTQUICK OFF CACHE BOOL "Don't build QCoro Quick" FORCE)
 set(BUILD_TESTING OFF CACHE BOOL "Disable standard tests" FORCE)
 
+set(QCORO_BUILD_QML OFF CACHE BOOL "" FORCE)
+set(QCORO_WITH_QTQML OFF CACHE BOOL "" FORCE)
 FetchContent_Declare(
     QCoro
     GIT_REPOSITORY https://github.com/danvratil/qcoro.git
     GIT_TAG v0.10.0
 )
+
+
 FetchContent_MakeAvailable(QCoro)
 
 set(PROJECT_SOURCES
