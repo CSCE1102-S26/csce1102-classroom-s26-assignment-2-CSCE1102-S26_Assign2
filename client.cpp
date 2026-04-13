@@ -47,7 +47,7 @@ QCoro::Task<void> client::sendNetworkMessage(QString host, quint16 port, QString
     // TODO: Asynchronously wait for Qt to finish flushing the buffer and disconnecting using co_await and qCoro.
     co_await qCoro(&socket).waitForDisconnected();
     // TODO: Show a QMessageBox::information stating the message was sent successfully.
-    QMessageBox::information(this, "Disconnection Successful!", "You have succesfully disconnected from the server.");
+    QMessageBox::information(this, "Message Sent", "Message sent successfully!");
 }
 
 void client::on_sendButton_clicked()

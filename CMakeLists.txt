@@ -51,6 +51,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(ClientChat
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+
     )
 else()
     if(ANDROID)
@@ -63,6 +64,8 @@ else()
         )
     endif()
 endif()
+
+include_directories(C:/msys64/ucrt64/include)
 
 # 4. Link the newly added Qt Network and QCoro libraries to your executable
 target_link_libraries(ClientChat PRIVATE
