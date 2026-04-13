@@ -15,6 +15,9 @@ public:
     client(QWidget *parent = nullptr);
     ~client();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::client *ui;
 
