@@ -2,7 +2,7 @@
 #define CLIENT_H
 
 #include <QMainWindow>
-#include <qcorotask.h> // Include QCoro core
+#include <qcorotask.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class client; }
@@ -25,4 +25,4 @@ private:
     QCoro::Task<void> sendNetworkMessage(QString host, quint16 port, QString message);
 };
 
-#endif // CLIENT_H
+#endif
