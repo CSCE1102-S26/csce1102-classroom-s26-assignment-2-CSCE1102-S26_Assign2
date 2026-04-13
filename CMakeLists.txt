@@ -22,6 +22,7 @@ set(USE_QT_VERSION ${QT_VERSION_MAJOR} CACHE STRING "Compile QCoro with Qt${QT_V
 set(QCORO_BUILD_EXAMPLES OFF CACHE BOOL "Don't build QCoro examples" FORCE)
 set(QCORO_BUILD_TESTING OFF CACHE BOOL "Don't build QCoro tests" FORCE)
 set(QCORO_WITH_QTDBUS OFF CACHE BOOL "Don't build QCoro DBus" FORCE)
+set(QCORO_WITH_QTNETWORK ON CACHE BOOL "Build QCoro Network" FORCE)
 set(QCORO_WITH_QTWEBSOCKETS OFF CACHE BOOL "Don't build QCoro WebSockets" FORCE)
 set(QCORO_WITH_QTQML OFF CACHE BOOL "Don't build QCoro QML" FORCE)
 set(QCORO_WITH_QTQUICK OFF CACHE BOOL "Don't build QCoro Quick" FORCE)
@@ -30,7 +31,7 @@ set(BUILD_TESTING OFF CACHE BOOL "Disable standard tests" FORCE)
 FetchContent_Declare(
     QCoro
     GIT_REPOSITORY https://github.com/danvratil/qcoro.git
-    GIT_TAG v0.10.0
+    GIT_TAG v0.13.0
 )
 FetchContent_MakeAvailable(QCoro)
 
@@ -62,10 +63,9 @@ endif()
 target_link_libraries(ClientChat PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Network
-    QCoro${QT_VERSION_MAJOR}Core
-    QCoro${QT_VERSION_MAJOR}Network
+    QCoro6Core
+    QCoro6Network
 )
-
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.ClientChat)
 endif()
