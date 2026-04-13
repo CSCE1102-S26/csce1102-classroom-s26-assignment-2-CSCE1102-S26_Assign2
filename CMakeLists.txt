@@ -62,8 +62,8 @@ endif()
 target_link_libraries(ClientChat PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Network
-    QCoro${QT_VERSION_MAJOR}Core
-    QCoro${QT_VERSION_MAJOR}Network
+    QCoro${QT_VERSION_MAJOR}::Core
+    QCoro${QT_VERSION_MAJOR}::Network
 )
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)
