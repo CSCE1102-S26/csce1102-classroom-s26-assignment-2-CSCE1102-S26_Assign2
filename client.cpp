@@ -19,27 +19,38 @@ client::~client()
 
 QCoro::Task<void> client::sendNetworkMessage(QString host, quint16 port, QString message)
 {
-    // TODO: Create a QTcpSocket locally. (It will be destroyed automatically when this function ends).
 
-    // TODO: Print a qDebug() message stating you are attempting to connect to the host and port.
+    QTcpSocket socket;
 
-    // TODO: Initiate the connection to the host using the socket.
+    qDebug() << "Attempting to connect to" << host << "on port" << port;
 
-    // TODO: Asynchronously wait for the connection to establish using co_await and qCoro.
-    // Save the result into a boolean variable (e.g., 'connected').
+    socket.connectToHost(host, port);
 
-    // TODO: Write an if-statement. If NOT connected:
-    // 1. Show a QMessageBox::critical stating the connection failed, using socket.errorString().
-    // 2. co_return; to exit early.
+    bool connected = co_await qCoro(&socket).waitForConnected();
 
-    // TODO: Print a qDebug() message confirming connection.
+    if (!connected) {
+        QMessageBox::critical(this, "Connection Failed",
+                              "Could not connect: " + socket.errorString());
+        co_return;
+    }
 
-    // TODO: Write the 'message' variable to the socket (remember to convert it to Utf8).
+    qDebug() << "Connected successfully.";
 
-    // TODO: Tell Qt to gracefully disconnect from the host.
+    socket.write(message.toUtf8());
 
-    // TODO: Asynchronously wait for Qt to finish flushing the buffer and disconnecting using co_await and qCoro.
+    socket.disconnectFromHost();
 
-    // TODO: Show a QMessageBox::information stating the message was sent successfully.
+    co_await qCoro(&socket).waitForDisconnected();
 
+    QMessageBox::information(this, "Success",
+                             "Message sent successfully.");
 }
+
+void client::on_sendButton_clicked()
+{
+    QString host = "127.0.0.1";
+    quint16 port = 54321;
+    QString message = ui->messagelineEdit->text();
+    sendNetworkMessage(host, port, message);
+}
+
