@@ -54,7 +54,8 @@ awaitable<void> listener() {
 
 
 
-int main() {
+int main()
+{
     boost::asio::io_context io_context;
 
     // Start the main listener coroutine
@@ -65,4 +66,4 @@ int main() {
 
     return 0;
 }
-}
+

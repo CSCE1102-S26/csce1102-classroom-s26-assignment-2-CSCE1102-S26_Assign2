@@ -1,45 +1,53 @@
 #include "client.h"
 #include "ui_client.h"
+#include <QMessageBox>
 #include <QTcpSocket>
-#include <QCoro/QCoroNetwork> // Required to await QTcpSocket
-#include <QMessageBox>        // Required for UI feedback
-#include <QDebug>
 
-client::client(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::client)
-{
+Client::Client(QWidget *parent) : QWidget(parent), ui(new Ui::Client) {
     ui->setupUi(this);
+    
+    socket = new QTcpSocket(this);
+    
+
+    connect(ui->sendButton, &QPushButton::clicked, this, &Client::on_sendButton_clicked);
+    connect(socket, &QTcpSocket::readyRead, this, &Client::onReadyRead);
 }
 
-client::~client()
+Client::~Client()
 {
     delete ui;
 }
 
-QCoro::Task<void> client::sendNetworkMessage(QString host, quint16 port, QString message)
+void Client::on_sendButton_clicked()
 {
-    // TODO: Create a QTcpSocket locally. (It will be destroyed automatically when this function ends).
+    QString host = "127.0.0.1";
+    quint16 port = 54321;
+    
+    QString message = ui->messagelineEdit->text();
+    
+    
+    sendNetworkMessage(host, port, message);
+    
+    QMessageBox::information(this, "Success", "Message sent successfully!");
+}
 
-    // TODO: Print a qDebug() message stating you are attempting to connect to the host and port.
 
-    // TODO: Initiate the connection to the host using the socket.
+void Client::sendNetworkMessage(const QString& host, int port, const QString& message) {
+    
+    if (socket->state() != QAbstractSocket::ConnectedState) {
+        socket->connectToHost(host, port);
+    }
+    
+   
+    if (socket->waitForConnected(3000)) {
+      
+        socket->write(message.toUtf8());
+        socket->flush();
+    }
+}
 
-    // TODO: Asynchronously wait for the connection to establish using co_await and qCoro.
-    // Save the result into a boolean variable (e.g., 'connected').
-
-    // TODO: Write an if-statement. If NOT connected:
-    // 1. Show a QMessageBox::critical stating the connection failed, using socket.errorString().
-    // 2. co_return; to exit early.
-
-    // TODO: Print a qDebug() message confirming connection.
-
-    // TODO: Write the 'message' variable to the socket (remember to convert it to Utf8).
-
-    // TODO: Tell Qt to gracefully disconnect from the host.
-
-    // TODO: Asynchronously wait for Qt to finish flushing the buffer and disconnecting using co_await and qCoro.
-
-    // TODO: Show a QMessageBox::information stating the message was sent successfully.
-
+void Client::onReadyRead()
+{
+    QByteArray data = socket->readAll();
+    ui->chatDisplay->append(QString::fromUtf8(data));
 }
