@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
+<<<<<<< HEAD
  <class>Client</class>
  <widget class="QWidget" name="Client">
+=======
+ <class>client</class>
+ <widget class="QMainWindow" name="client">
+>>>>>>> 94c10cb9d84c0b7ebc383fe1993bc808236789c8
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>400</width>
     <height>300</height>
    </rect>
@@ -33,4 +39,28 @@
    </item>
   </layout>
  </widget>
+=======
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>client</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+>>>>>>> 94c10cb9d84c0b7ebc383fe1993bc808236789c8
 </ui>
